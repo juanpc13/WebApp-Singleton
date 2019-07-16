@@ -10,11 +10,38 @@
     </h:head>
 
     <h:body>
-        
+
         <h:form id="form" >
-            <h2>Cantidad de productos</h2>
-            <h:outputLabel value="Productos :#{mainView.numbreOfProducts}" />
+            <h2>Agregar Productos:</h2>
+            
+                <h:panelGrid id="grid" columns="2" cellpadding="5">
+                    
+
+                </h:panelGrid>
+
+                <p:commandButton value="Non-Ajax" ajax="false" icon="pi pi-check" validateClient="true" style="margin-right:10px"/>
+            
+            
+            
+            <h2>Ver Productos:</h2>
+            <p:dataTable var="product" value="#{mainView.productos}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{product.idProducto}" />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{product.nombre}" />
+                </p:column>
+
+                <p:column headerText="Categoria">
+                    <h:outputText value="#{product.idCategoria.nombre}" />
+                </p:column>
+
+                <p:column headerText="Precio">
+                    <h:outputText value="#{product.precio}" />
+                </p:column>
+            </p:dataTable>
         </h:form>
-        
+
     </h:body>
 </html>

@@ -1,11 +1,13 @@
 package ues.progra2.productosweb.backing;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import ues.progra2.productosweb.controller.ProductoFacadeLocal;
+import ues.progra2.productosweb.entity.Producto;
+import ues.progra2.productosweb.singleton.SingletonController;
 
 /**
  *
@@ -15,22 +17,23 @@ import ues.progra2.productosweb.controller.ProductoFacadeLocal;
 @ViewScoped
 public class MainView implements Serializable{
     
-    @Inject
-    private ProductoFacadeLocal pfl;    
+    @EJB
+    SingletonController sc;
     
-    private Integer numbreOfProducts;
+    List<Producto> productos;
     
     @PostConstruct
     public void init(){
-        numbreOfProducts = pfl.count();
+        productos = sc.getPfl().findAll();
     }
 
-    public Integer getNumbreOfProducts() {
-        return numbreOfProducts;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setNumbreOfProducts(Integer numbreOfProducts) {
-        this.numbreOfProducts = numbreOfProducts;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
+    
     
 }
