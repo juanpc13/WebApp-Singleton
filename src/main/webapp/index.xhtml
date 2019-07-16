@@ -12,17 +12,33 @@
     <h:body>
 
         <h:form id="form" >
-            <h2>Agregar Productos:</h2>
+            <h:outputLabel value="SingletonID=#{mainView.instanceID}"/>
+            <h2>Agregar Productos:</h2>           
             
-                <h:panelGrid id="grid" columns="2" cellpadding="5">
-                    
+            
+            <p:growl id="messages" />
 
-                </h:panelGrid>
+            <h:panelGrid id="grid" columns="2" cellpadding="5">
+                <h:outputLabel for="nombre" value="Nombre:" style="font-weight:bold"/>
+                <p:inputText id="nombre" value="#{mainView.producto.nombre}" required="true" label="Nombre"/>
 
-                <p:commandButton value="Non-Ajax" ajax="false" icon="pi pi-check" validateClient="true" style="margin-right:10px"/>
-            
-            
-            
+                <h:outputLabel for="categoria" value="Categoria:" style="font-weight:bold"/>
+                <p:selectOneMenu id="categoria" value="#{mainView.producto.idCategoria.idCategoria}" style="width:175px">
+                    <f:selectItem itemLabel="-Seleccione-" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{mainView.categorias}" var="item" itemValue="#{item.idCategoria}" itemLabel="#{item.nombre}"/>
+                </p:selectOneMenu>
+
+                <h:outputLabel for="precio" value="Precio:" style="font-weight:bold"/>
+                <p:inputText id="precio" value="#{mainView.producto.precio}" converterMessage="Error en convertir">
+                    <f:validateDoubleRange minimum="0.0" maximum="9999.99" />
+                </p:inputText>
+                
+                <p:commandButton value="Registrar" ajax="false" update="form:grid" actionListener="#{mainView.saveProducto}"/>
+
+            </h:panelGrid>
+
+
+
             <h2>Ver Productos:</h2>
             <p:dataTable var="product" value="#{mainView.productos}">
                 <p:column headerText="Id">

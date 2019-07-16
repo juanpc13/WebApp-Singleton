@@ -22,6 +22,7 @@ public class SingletonController {
     
     @Inject
     private ProductoFacadeLocal pfl;
+    @Inject
     private CategoriaFacadeLocal cfl;
     
     @Lock(LockType.READ)
